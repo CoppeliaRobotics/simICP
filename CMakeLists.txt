@@ -28,3 +28,6 @@ set(SOURCES
 )
 add_library(v_repExtICP SHARED ${SOURCES} ${CMAKE_BINARY_DIR}/generated/stubs.cpp "${VREP_EXPORTED_SOURCES}")
 target_link_libraries(v_repExtICP ${Boost_LIBRARIES} ${VREP_LIBRARIES})
+
+install(TARGETS v_repExtICP DESTINATION ${VREP_ROOT})
+
