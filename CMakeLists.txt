@@ -13,20 +13,24 @@ find_package(VREP REQUIRED)
 
 include_directories(${VREP_INCLUDE})
 include_directories(${CMAKE_BINARY_DIR}/generated)
+include_directories(${CMAKE_SOURCE_DIR}/external)
 include_directories(${CMAKE_SOURCE_DIR}/external/libicp/src)
 include_directories(${Boost_INCLUDE_DIRS})
 
 vrep_generate_stubs(${CMAKE_BINARY_DIR}/generated XML_FILE ${CMAKE_SOURCE_DIR}/callbacks.xml LUA_FILE ${CMAKE_SOURCE_DIR}/simExtICP.lua)
 
 set(SOURCES
-    v_repExtICP.cpp
+    plugin.cpp
     external/libicp/src/icp.cpp
     external/libicp/src/icpPointToPlane.cpp
     external/libicp/src/icpPointToPoint.cpp
     external/libicp/src/kdtree.cpp
     external/libicp/src/matrix.cpp
+    ${CMAKE_SOURCE_DIR}/external/v_repPlusPlus/Plugin.cpp
+    ${CMAKE_BINARY_DIR}/generated/stubs.cpp
+    ${VREP_EXPORTED_SOURCES}
 )
-add_library(v_repExtICP SHARED ${SOURCES} ${CMAKE_BINARY_DIR}/generated/stubs.cpp "${VREP_EXPORTED_SOURCES}")
+add_library(v_repExtICP SHARED ${SOURCES})
 target_link_libraries(v_repExtICP ${Boost_LIBRARIES} ${VREP_LIBRARIES})
 
 install(TARGETS v_repExtICP DESTINATION ${VREP_ROOT})
