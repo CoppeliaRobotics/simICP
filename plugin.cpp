@@ -8,7 +8,7 @@
 
 #include <icpPointToPlane.h>
 
-#include "v_repPlusPlus/Plugin.h"
+#include "simPlusPlus/Plugin.h"
 #include "plugin.h"
 #include "stubs.h"
 
@@ -53,7 +53,7 @@ void matchToShape(SScriptCallBack *p, const char *cmd, matchToShape_in *in, matc
     simRemoveObject(model_cloud);
 }
 
-class Plugin : public vrep::Plugin
+class Plugin : public sim::Plugin
 {
 public:
     void onStart()
@@ -66,4 +66,4 @@ public:
     }
 };
 
-VREP_PLUGIN(PLUGIN_NAME, PLUGIN_VERSION, Plugin)
+SIM_PLUGIN(PLUGIN_NAME, PLUGIN_VERSION, Plugin)

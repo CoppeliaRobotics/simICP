@@ -5,11 +5,16 @@ copying, etc.) contained in the same directory if it is present, or
 under the same terms of the files in the parent directory otherwise.
 
 -----------------------------------------------------------------------
+simExtICP, based on v_repExtICP from Coppelia Robotics GmbH
+on September 2019
+
+Copyright (C) 2018-2020 Coppelia Robotics GmbH / Marc Freese
+Copyright (C) 2019 Robot Nordic ApS
+
+All rights reserved.
+
 GNU GPL V3, see here for details:
 https://www.gnu.org/licenses/gpl-3.0.html
-
-Copyright (c) 2018-2019, Coppelia Robotics GmbH
-All rights reserved.
 -----------------------------------------------------------------------
 
 The ICP plugin is courtesy of Federico Ferri.
