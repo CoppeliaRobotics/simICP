@@ -28,13 +28,13 @@ public:
     {
         int modl_sz = 0;
         const float *modl_pts = simGetPointCloudPoints(in->model_handle, &modl_sz, 0);
-        if(!modl_pts) throw std::string("model point cloud empty");
+        if(!modl_pts) throw std::runtime_error("model point cloud empty");
         double *modl = new double[3 * modl_sz];
         for(size_t i = 0; i < 3 * modl_sz; i++) modl[i] = modl_pts[i];
 
         int tmpl_sz = 0;
         const float *tmpl_pts = simGetPointCloudPoints(in->template_handle, &tmpl_sz, 0);
-        if(!tmpl_pts) throw std::string("model point cloud empty");
+        if(!tmpl_pts) throw std::runtime_error("model point cloud empty");
         double *tmpl = new double[3 * tmpl_sz];
         for(size_t i = 0; i < 3 * tmpl_sz; i++) tmpl[i] = tmpl_pts[i];
 
