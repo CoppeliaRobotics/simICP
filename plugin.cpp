@@ -9,6 +9,7 @@
 #include <icpPointToPlane.h>
 
 #include "simPlusPlus/Plugin.h"
+#include "config.h"
 #include "plugin.h"
 #include "stubs.h"
 
