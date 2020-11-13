@@ -4,8 +4,6 @@
 #include <vector>
 #include <map>
 
-#include <boost/algorithm/string/predicate.hpp>
-
 #include <icpPointToPlane.h>
 
 #include "simPlusPlus/Plugin.h"
