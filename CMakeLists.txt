@@ -4,8 +4,6 @@ project(simExtICP)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_MACOSX_RPATH 1)
 
-find_package(Boost REQUIRED)
-
 if(NOT LIBPLUGIN_DIR)
     if(DEFINED ENV{COPPELIASIM_ROOT_DIR})
         set(LIBPLUGIN_DIR $ENV{COPPELIASIM_ROOT_DIR}/programming/libPlugin)
@@ -19,11 +17,9 @@ set(CMAKE_MODULE_PATH
     ${LIBPLUGIN_DIR}/cmake)
 find_package(CoppeliaSim 4.1.0.0 REQUIRED)
 
-include_directories(${COPPELIASIM_INCLUDE_DIR})
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/generated)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/libicp/src)
-include_directories(${Boost_INCLUDE_DIRS})
 
 coppeliasim_generate_stubs(${CMAKE_CURRENT_BINARY_DIR}/generated XML_FILE ${CMAKE_CURRENT_SOURCE_DIR}/callbacks.xml LUA_FILE ${CMAKE_CURRENT_SOURCE_DIR}/simExtICP.lua)
 
@@ -38,8 +34,4 @@ set(SOURCES
     external/libicp/src/matrix.cpp
     ${COPPELIASIM_EXPORTED_SOURCES}
 )
-add_library(simExtICP SHARED ${SOURCES})
-target_link_libraries(simExtICP ${Boost_LIBRARIES} ${COPPELIASIM_LIBRARIES})
-
-install(TARGETS simExtICP DESTINATION ${COPPELIASIM_PLUGINS_DIR})
-
+coppeliasim_add_plugin(simExtICP SOURCES ${SOURCES})
