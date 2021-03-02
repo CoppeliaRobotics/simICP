@@ -60,7 +60,7 @@ public:
         simInsertObjectIntoPointCloud(model_cloud, in->model_handle, 0, voxel_size, NULL, NULL);
 
         match_in args;
-        args._scriptID = in->_scriptID;
+        args._ = in->_;
         args.model_handle = model_cloud;
         args.template_handle = in->template_handle;
         args.outlier_treshold = in->outlier_treshold;
