@@ -39,9 +39,6 @@ public:
         IcpPointToPlane icp(modl, modl_sz, 3);
         icp.fit(tmpl, tmpl_sz, R, t, in->outlier_treshold);
 
-        simReleaseBuffer(modl);
-        simReleaseBuffer(tmpl);
-
         out->m.resize(12);
         for(int row = 0; row < 3; row++)
         {
