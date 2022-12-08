@@ -36,8 +36,10 @@ public:
         Matrix R = Matrix::eye(3);
         Matrix t(3,1);
 
-        IcpPointToPlane icp(modl, modl_sz, 3);
-        icp.fit(tmpl, tmpl_sz, R, t, in->outlier_treshold);
+        std::vector<double> _modl(modl,modl+modl_sz*3);
+        IcpPointToPlane icp(_modl.data(), modl_sz, 3);
+        std::vector<double> _tmpl(tmpl,tmpl+tmpl_sz*3);
+        icp.fit(_tmpl.data(), tmpl_sz, R, t, in->outlier_treshold);
 
         out->m.resize(12);
         for(int row = 0; row < 3; row++)
