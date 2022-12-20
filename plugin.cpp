@@ -66,7 +66,7 @@ public:
         match(&args, &ret);
         out->m = ret.m;
 
-        simRemoveObject(model_cloud);
+        simRemoveObjects(&model_cloud,1);
     }
 };
 
