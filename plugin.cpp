@@ -25,21 +25,16 @@ public:
 
     void match(match_in *in, match_out *out)
     {
-        int modl_sz = 0;
-        const double *modl = simGetPointCloudPoints(in->model_handle, &modl_sz, 0);
-        if(!modl) throw std::runtime_error("model point cloud empty");
-
-        int tmpl_sz = 0;
-        const double *tmpl = simGetPointCloudPoints(in->template_handle, &tmpl_sz, 0);
-        if(!tmpl) throw std::runtime_error("model point cloud empty");
+        std::vector<double> modl = sim::getPointCloudPoints(in->model_handle);
+        std::vector<double> tmpl = sim::getPointCloudPoints(in->template_handle);
+        if(modl.empty()) throw std::runtime_error("model point cloud empty");
+        if(tmpl.empty()) throw std::runtime_error("model point cloud empty");
 
         Matrix R = Matrix::eye(3);
         Matrix t(3,1);
 
-        std::vector<double> _modl(modl,modl+modl_sz*3);
-        IcpPointToPlane icp(_modl.data(), modl_sz, 3);
-        std::vector<double> _tmpl(tmpl,tmpl+tmpl_sz*3);
-        icp.fit(_tmpl.data(), tmpl_sz, R, t, in->outlier_treshold);
+        IcpPointToPlane icp(modl.data(), modl.size() / 3, 3);
+        icp.fit(tmpl.data(), tmpl.size() / 3, R, t, in->outlier_treshold);
 
         out->m.resize(12);
         for(int row = 0; row < 3; row++)
@@ -54,8 +49,8 @@ public:
     {
         // create a point cloud from given shape
         double voxel_size = 0.005;
-        int model_cloud = simCreatePointCloud(voxel_size, 1, 0, 1, 0);
-        simInsertObjectIntoPointCloud(model_cloud, in->model_handle, 0, voxel_size, NULL, NULL);
+        int model_cloud = sim::createPointCloud(voxel_size, 1, 0, 1);
+        sim::insertObjectIntoPointCloud(model_cloud, in->model_handle, 0, voxel_size);
 
         match_in args;
         args._ = in->_;
@@ -66,7 +61,7 @@ public:
         match(&args, &ret);
         out->m = ret.m;
 
-        simRemoveObjects(&model_cloud,1);
+        sim::removeObjects({model_cloud});
     }
 };
 
