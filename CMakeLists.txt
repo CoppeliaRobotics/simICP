@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.11)
-project(simExtICP)
+project(simICP)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_MACOSX_RPATH 1)
@@ -33,4 +33,4 @@ set(SOURCES
     external/libicp/src/matrix.cpp
     ${COPPELIASIM_EXPORTED_SOURCES}
 )
-coppeliasim_add_plugin(simExtICP SOURCES ${SOURCES})
+coppeliasim_add_plugin(simICP SOURCES ${SOURCES})
