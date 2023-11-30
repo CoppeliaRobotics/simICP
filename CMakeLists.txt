@@ -17,15 +17,14 @@ list(APPEND CMAKE_MODULE_PATH
 find_package(CoppeliaSim 4.5.1.7 REQUIRED)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/generated)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/libicp/src)
 
-coppeliasim_generate_stubs(${CMAKE_CURRENT_BINARY_DIR}/generated XML_FILE ${CMAKE_CURRENT_SOURCE_DIR}/callbacks.xml LUA_FILE ${CMAKE_CURRENT_SOURCE_DIR}/simICP.lua)
+coppeliasim_generate_stubs(${CMAKE_CURRENT_BINARY_DIR}/generated XML_FILE ${CMAKE_CURRENT_SOURCE_DIR}/sourceCode/callbacks.xml LUA_FILE ${CMAKE_CURRENT_SOURCE_DIR}/lua/simICP.lua)
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/sourceCode/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 set(SOURCES
-    plugin.cpp
+    sourceCode/plugin.cpp
     external/libicp/src/icp.cpp
     external/libicp/src/icpPointToPlane.cpp
     external/libicp/src/icpPointToPoint.cpp
