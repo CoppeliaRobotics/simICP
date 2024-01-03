@@ -12,5 +12,3 @@ All rights reserved.
 GNU GPL V3, see here for details:
 https://www.gnu.org/licenses/gpl-3.0.html
 -----------------------------------------------------------------------
-
-The ICP plugin is courtesy of Federico Ferri.
